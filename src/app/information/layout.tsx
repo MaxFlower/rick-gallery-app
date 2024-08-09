@@ -3,6 +3,7 @@
 import { Stack, Grid, GridItem, Heading } from '@chakra-ui/react'
 import { AppContextProvider } from '../../hooks/context.hook'
 import { ReactNode } from 'react'
+import ProfileMenu from '../../components/profile-menu';
 
 export default function InformationLayout({ children }: { children: ReactNode }) {
     return (
@@ -14,7 +15,7 @@ export default function InformationLayout({ children }: { children: ReactNode })
                 gap='1'
             >
                 <GridItem p='4' bg='green.50' area={'header'}>
-                    Menu
+                    <ProfileMenu />
                 </GridItem>
                 <GridItem p='4' bg='grey.100' area={'main'} height='100%' overflow='scroll'>
                     {children}
