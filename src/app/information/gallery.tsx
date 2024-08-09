@@ -1,8 +1,27 @@
 import { useQuery, gql } from '@apollo/client'
-import { Button, Heading, Stack, VStack, Text, Spinner, Wrap, WrapItem } from '@chakra-ui/react'
+import {
+    Button,
+    Heading,
+    Stack,
+    VStack,
+    Text,
+    Spinner,
+    Wrap,
+    WrapItem,
+    CardHeader,
+    CardBody,
+    CardFooter,
+    Card
+} from '@chakra-ui/react'
 import { useState } from 'react'
 import InfoCard from './info-card'
-import MultifunctionalModal from '../../components/multifunctional-modal';
+import MultifunctionalModal from '../../components/multifunctional-modal'
+
+interface CharacterDetails {
+    name: string;
+    status: string;
+    image: string;
+}
 
 interface GQLGetCharacters {
     characters: {
@@ -10,11 +29,7 @@ interface GQLGetCharacters {
             count: number;
             pages: number;
         }
-        results: {
-            name: string;
-            status: string;
-            image: string;
-        }[]
+        results: CharacterDetails[]
     }
 }
 
@@ -38,7 +53,7 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
     const {data, loading, error} = useQuery<GQLGetCharacters>(GET_ITEMS, {
         variables: {page: currentPage, filter: {name: 'rick'}},
     });
-    const [selected, setSelected] = useState(null)
+    const [selected, setSelected] = useState<CharacterDetails | null>(null)
     const isCharacterSelected = selected !== null
 
     if (error) return 'bad'
@@ -52,8 +67,21 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
                 {loading
                     ? <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl'/>
                     : data.characters.results.map((character, idx) => (
-                        <WrapItem key={character.name + idx} onClick={() => setSelected(character)}>
-                            <InfoCard char={character} />
+                        <WrapItem key={character.name + idx}>
+                            <Card maxW={200}>
+                                <CardHeader>
+                                    <Heading size='md'>{character.name}</Heading>
+                                </CardHeader>
+                                <CardBody>
+                                    <Text noOfLines={3}>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                        tempor incididunt ut labore et dolore magna aliqua.
+                                    </Text>
+                                </CardBody>
+                                <CardFooter>
+                                    <Button onClick={() => setSelected(character)}>More</Button>
+                                </CardFooter>
+                            </Card>
                         </WrapItem>
                     ))
                 }
