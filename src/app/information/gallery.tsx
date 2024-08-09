@@ -1,7 +1,8 @@
 import { useQuery, gql } from '@apollo/client'
-import { Button, Heading, Stack, VStack, Text, Spinner } from '@chakra-ui/react'
+import { Button, Heading, Stack, VStack, Text, Spinner, Wrap, WrapItem } from '@chakra-ui/react'
 import { useState } from 'react'
 import InfoCard from './info-card'
+import MultifunctionalModal from '../../components/multifunctional-modal';
 
 interface GQLGetCharacters {
     characters: {
@@ -38,6 +39,7 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
         variables: {page: currentPage, filter: {name: 'rick'}},
     });
     const [selected, setSelected] = useState(null)
+    const isCharacterSelected = selected !== null
 
     if (error) return 'bad'
 
@@ -46,7 +48,16 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
             <Heading as='h2' size='lg'>
                 Rick gallery 🖼️ 🖼️ 🖼️
             </Heading>
-            {loading ? <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl'/> : data.characters.results.map((character, idx) => (<InfoCard char={character} />))}
+            <Wrap spacing={4} justify='center' align='center' height='100%' overflow='scroll'>
+                {loading
+                    ? <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl'/>
+                    : data.characters.results.map((character, idx) => (
+                        <WrapItem key={character.name + idx} onClick={() => setSelected(character)}>
+                            <InfoCard char={character} />
+                        </WrapItem>
+                    ))
+                }
+            </Wrap>
 
             <Stack spacing={4} align='center' direction='row'>
                 <Button colorScheme='teal' isDisabled={currentPage === 1} onClick={() => onPageChange(currentPage -1)}>
@@ -57,6 +68,10 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
                 </Button>
                 <Text as='b'>Current page: {currentPage} of {!loading ? data.characters.info.pages : '...'}</Text>
             </Stack>
+
+            <MultifunctionalModal title='Character overview' opened={isCharacterSelected} handleClose={() => setSelected(null)}>
+                <InfoCard char={selected} />
+            </MultifunctionalModal>
         </VStack>
     )
 }
