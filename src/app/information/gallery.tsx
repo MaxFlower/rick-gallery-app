@@ -1,6 +1,7 @@
 import { useQuery, gql } from '@apollo/client'
 import { Button, Heading, Stack, VStack, Text, Spinner } from '@chakra-ui/react'
 import { useState } from 'react'
+import InfoCard from './info-card'
 
 interface GQLGetCharacters {
     characters: {
@@ -45,7 +46,7 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
             <Heading as='h2' size='lg'>
                 Rick gallery 🖼️ 🖼️ 🖼️
             </Heading>
-            {loading ? <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl'/> : JSON.stringify(data.characters.results)}
+            {loading ? <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl'/> : data.characters.results.map((character, idx) => (<InfoCard char={character} />))}
 
             <Stack spacing={4} align='center' direction='row'>
                 <Button colorScheme='teal' isDisabled={currentPage === 1} onClick={() => onPageChange(currentPage -1)}>
