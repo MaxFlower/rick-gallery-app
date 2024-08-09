@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useAppContext } from '../../hooks/context.hook'
 import ProfileForm from '../../components/profile-form'
 import MultifunctionalModal from '../../components/multifunctional-modal'
+import Content from './content'
 
 export default function InformationPage() {
     const { profile, updateProfile } = useAppContext()
@@ -19,7 +20,7 @@ export default function InformationPage() {
 
     return (
         <>
-            {isIdentified ? 'show content' : 'hide content'}
+            {isIdentified ? <Content /> : 'hide content'}
             <MultifunctionalModal title='Identify yourself' opened={!isIdentified} isProtected={true}>
                 <ProfileForm btLabel='Submit' onSubmit={handleSubmit} />
             </MultifunctionalModal>

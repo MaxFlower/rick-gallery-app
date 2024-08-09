@@ -3,17 +3,17 @@ import Gallery from './gallery'
 import client from '../../lib/apollo-client'
 import { ApolloProvider } from '@apollo/client'
 
-export default function ContentBox() {
+export default function Content() {
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const { replace } = useRouter()
     const currentPage = parseInt(searchParams.get('page') ?? '1', 10)
     function handlePageChange(page: number) {
-        const params = new URLSearchParams(searchParams);
+        const params = new URLSearchParams(searchParams)
         if (page > 1) {
-            params.set('page', String(page));
+            params.set('page', String(page))
         } else {
-            params.delete('page');
+            params.delete('page')
         }
         replace(`${pathname}?${params.toString()}`)
     }
