@@ -1,5 +1,6 @@
 import { useQuery, gql } from '@apollo/client'
-import { Heading, VStack } from '@chakra-ui/react';
+import { Button, Heading, Stack, VStack, Text, Spinner } from '@chakra-ui/react'
+import { useState } from 'react'
 
 interface GQLGetCharacters {
     characters: {
@@ -31,10 +32,11 @@ const GET_ITEMS = gql`
   }
 `;
 
-export default function Gallery({ currentPage }: { currentPage: number }) {
+export default function Gallery({ currentPage, onPageChange }: { currentPage: number, onPageChange: (page: number) => void }) {
     const {data, loading, error} = useQuery<GQLGetCharacters>(GET_ITEMS, {
         variables: {page: currentPage, filter: {name: 'rick'}},
     });
+    const [selected, setSelected] = useState(null)
 
     if (error) return 'bad'
 
@@ -43,7 +45,17 @@ export default function Gallery({ currentPage }: { currentPage: number }) {
             <Heading as='h2' size='lg'>
                 Rick gallery 🖼️ 🖼️ 🖼️
             </Heading>
-            {loading ? '... loading' : JSON.stringify(data.characters.results)}
+            {loading ? <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl'/> : JSON.stringify(data.characters.results)}
+
+            <Stack spacing={4} align='center' direction='row'>
+                <Button colorScheme='teal' isDisabled={currentPage === 1} onClick={() => onPageChange(currentPage -1)}>
+                    Previous
+                </Button>
+                <Button colorScheme='teal' isDisabled={!loading && currentPage === data.characters?.info.pages} onClick={() => onPageChange(currentPage + 1)}>
+                    Next
+                </Button>
+                <Text as='b'>Current page: {currentPage} of {!loading ? data.characters.info.pages : '...'}</Text>
+            </Stack>
         </VStack>
     )
 }
