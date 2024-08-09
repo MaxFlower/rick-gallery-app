@@ -18,8 +18,11 @@ export default function InformationPage() {
     }
 
     return (
-        <MultifunctionalModal title='Identify yourself' opened={!isIdentified} isProtected={true}>
-            <ProfileForm btLabel='Submit' onSubmit={handleSubmit} />
-        </MultifunctionalModal>
+        <>
+            {isIdentified ? 'show content' : 'hide content'}
+            <MultifunctionalModal title='Identify yourself' opened={!isIdentified} isProtected={true}>
+                <ProfileForm btLabel='Submit' onSubmit={handleSubmit} />
+            </MultifunctionalModal>
+        </>
     )
 }
