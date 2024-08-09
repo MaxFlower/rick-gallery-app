@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, Dispatch, SetStateAction } from 'react'
-import { localStorageHook } from './local-storage.hook'
+import { useLocalStorage } from './local-storage.hook'
 
 export const PROFILE_KEY = 'profile'
 
@@ -18,7 +18,7 @@ const defaultContext: MainContext = { profile: null }
 const ContextHook = createContext<MainContext>(defaultContext)
 
 export const AppContextProvider = function ({ children }) {
-    const [profile, setProfile] = localStorageHook<Profile>(PROFILE_KEY)
+    const [profile, setProfile] = useLocalStorage<Profile>(PROFILE_KEY)
     const [state, setState] = useState({ profile })
 
     const updateProfile = (p: Profile) => {

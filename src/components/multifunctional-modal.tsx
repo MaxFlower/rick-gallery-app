@@ -10,7 +10,7 @@ import {
 import { useDisclosure } from '@chakra-ui/hooks'
 import { ReactNode, useEffect } from 'react'
 
-export default function MultifunctionalModal({ title, opened, children }: { title: string, opened: boolean, children: ReactNode }) {
+export default function MultifunctionalModal({ title, opened, children, isProtected = false, handleClose = () => {} }: { title: string, opened: boolean, children: ReactNode, isProtected?: boolean, handleClose?: () => void }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     useEffect(() => {
@@ -22,13 +22,13 @@ export default function MultifunctionalModal({ title, opened, children }: { titl
     }, [opened]);
 
     return (
-        <Modal isCentered isOpen={isOpen}>
+        <Modal isCentered closeOnEsc={!isProtected} closeOnOverlayClick={!isProtected} isOpen={isOpen} onClose={handleClose}>
             <ModalOverlay
                 bg='blackAlpha.300'
-                backdropFilter='blur(10px) hue-rotate(90deg)'
+                backdropFilter={isProtected ? 'blur(10px) hue-rotate(90deg)' : 'blur(2px)'}
             />
             <ModalContent>
-                <ModalCloseButton />
+                {!isProtected && <ModalCloseButton />}
                 <ModalHeader>{title}</ModalHeader>
                 <ModalBody>
                     {children}
