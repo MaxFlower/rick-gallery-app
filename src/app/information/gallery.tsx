@@ -1,5 +1,9 @@
 import { useQuery, gql } from '@apollo/client'
 import {
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
     Button,
     Heading,
     Stack,
@@ -57,7 +61,15 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
     const [selected, setSelected] = useState<CharacterDetails | null>(null)
     const isCharacterSelected = selected !== null
 
-    if (error) return 'bad'
+    if (error) {
+        return (
+            <Alert status='error'>
+                <AlertIcon />
+                <AlertTitle>Error: {error.name}!</AlertTitle>
+                <AlertDescription>{error.message}.</AlertDescription>
+            </Alert>
+        )
+    }
 
     return (
         <VStack spacing={4} height='100%'>
