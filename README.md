@@ -1,6 +1,6 @@
 # Rick's Gallery
 
-Welcome to Rick's Gallery! This is a minimalist web app where you can get information about all Rick characters throwout all episodes of one the famous cartoon series. 
+Welcome to Rick's Gallery! This is a minimalist web app where you can get information about all Rick characters through all episodes of one of the famous cartoon series. 
 
 ## Minimalistic tech stack
 
@@ -18,4 +18,11 @@ Welcome to Rick's Gallery! This is a minimalist web app where you can get inform
 
 Optional. Make sure your code is error-free by running:
 ```npm run lint```
+
+
+The main functionality is hidden over the personal form. Fill free to submit the form with your data and dive into Rick's World
+![protection](https://github.com/user-attachments/assets/2d64a5b7-c04e-470d-94c2-bee108200df0)
+
+I have organized the paginated list so you can make a guess about the question: is this Rick still alive or...
+![information-page](https://github.com/user-attachments/assets/d4f3cd95-68db-4475-8427-ee568418018b)
 
