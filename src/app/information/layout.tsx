@@ -5,7 +5,7 @@ import { Stack, Grid, GridItem, Heading } from '@chakra-ui/react'
 import { AppContextProvider } from '../../hooks/context.hook'
 import { ReactNode } from 'react'
 
-const NoSSRProfileMenu = dynamic(() => import('../../components/profile-form'), { ssr: false })
+const NoSSRProfileMenu = dynamic(() => import('../../components/profile-menu'), { ssr: false })
 
 export default function InformationLayout({ children }: { children: ReactNode }) {
     return (
