@@ -12,11 +12,14 @@ export default function InfoCard({ char }: { char: { name: string; image: string
                 alt={name}
                 borderRadius='lg'
                 boxSize='150px'
+                fallback={<Spinner />}
+                fallbackSrc='https://via.placeholder.com/150'
             />
             <Stack mt='6' spacing='3'>
                 <Heading size='md'>{name}</Heading>
-                <Text>
-                    test
+                <Text noOfLines={3}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.
                 </Text>
                 <Text color='blue.600' fontSize='2xl'>
                     Status: {status}

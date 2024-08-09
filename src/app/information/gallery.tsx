@@ -11,7 +11,8 @@ import {
     CardHeader,
     CardBody,
     CardFooter,
-    Card
+    Card,
+    Image
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import InfoCard from './info-card'
@@ -63,7 +64,7 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
             <Heading as='h2' size='lg'>
                 Rick gallery 🖼️ 🖼️ 🖼️
             </Heading>
-            <Wrap spacing={4} justify='center' align='center' height='100%' overflow='scroll'>
+            <Wrap spacing={4} p={4} justify='center' align='center' height='100%' overflow='scroll'>
                 {loading
                     ? <Spinner thickness='4px' speed='0.65s' emptyColor='gray.200' color='blue.500' size='xl'/>
                     : data.characters.results.map((character, idx) => (
@@ -73,13 +74,20 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
                                     <Heading size='md'>{character.name}</Heading>
                                 </CardHeader>
                                 <CardBody>
-                                    <Text noOfLines={3}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua.
+                                    <Image
+                                        src={character.image}
+                                        alt={character.name}
+                                        borderRadius='lg'
+                                        boxSize='150px'
+                                        fallback={<Spinner />}
+                                        fallbackSrc='https://via.placeholder.com/150'
+                                    />
+                                    <Text noOfLines={3} p={2}>
+                                        Your guess, is he 'Alive', 'Dead' or 'unknown'?
                                     </Text>
                                 </CardBody>
                                 <CardFooter>
-                                    <Button onClick={() => setSelected(character)}>More</Button>
+                                    <Button onClick={() => setSelected(character)}>Answer</Button>
                                 </CardFooter>
                             </Card>
                         </WrapItem>
