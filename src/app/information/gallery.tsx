@@ -95,7 +95,7 @@ export default function Gallery({ currentPage, onPageChange }: { currentPage: nu
                                         fallbackSrc='https://via.placeholder.com/150'
                                     />
                                     <Text noOfLines={3} p={2}>
-                                        Your guess, is he 'Alive', 'Dead' or 'unknown'?
+                                        Your guess, is he Alive, Dead or Unknown?
                                     </Text>
                                 </CardBody>
                                 <CardFooter>

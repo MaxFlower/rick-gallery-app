@@ -22,7 +22,7 @@ export default function InformationPage() {
     function CustomSkeleton() {
         return (
             <Stack>
-                {new Array(5).map(() => <Skeleton height='24px' />)}
+                {new Array(5).map((_, i) => <Skeleton height='24px' key={`skeleton-${i}`} />)}
             </Stack>
         )
     }
