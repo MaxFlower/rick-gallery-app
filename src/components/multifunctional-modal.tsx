@@ -10,7 +10,15 @@ import {
 import { useDisclosure } from '@chakra-ui/hooks'
 import { ReactNode, useEffect } from 'react'
 
-export default function MultifunctionalModal({ title, opened, children, isProtected = false, handleClose = () => {} }: { title: string, opened: boolean, children: ReactNode, isProtected?: boolean, handleClose?: () => void }) {
+interface IMultifunctionalModalProps {
+    title: string
+    opened: boolean
+    children: ReactNode
+    isProtected?: boolean
+    handleClose?: () => void
+}
+
+export default function MultifunctionalModal({ title, opened, children, isProtected = false, handleClose = () => {} }: IMultifunctionalModalProps) {
     const { isOpen, onOpen, onClose } = useDisclosure()
 
     useEffect(() => {

@@ -1,6 +1,11 @@
-import { Heading, Image, Spinner, Stack, Text, VStack } from '@chakra-ui/react';
+import { Heading, Image, Spinner, Stack, Text, VStack } from '@chakra-ui/react'
+import { CharacterDetails } from '../../definitions'
 
-export default function InfoCard({ char }: { char: { name: string; image: string; status: string }}) {
+interface IInfoCardProps {
+    char: CharacterDetails
+}
+
+export default function InfoCard({ char }: IInfoCardProps) {
     if (!char) {
         return null
     }

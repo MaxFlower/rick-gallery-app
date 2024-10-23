@@ -21,12 +21,7 @@ import {
 import { useState } from 'react'
 import InfoCard from './info-card'
 import MultifunctionalModal from '../../components/multifunctional-modal'
-
-interface CharacterDetails {
-    name: string;
-    status: string;
-    image: string;
-}
+import { CharacterDetails } from '../../definitions'
 
 interface GQLGetCharacters {
     characters: {
@@ -54,7 +49,12 @@ const GET_ITEMS = gql`
   }
 `;
 
-export default function Gallery({ currentPage, onPageChange }: { currentPage: number, onPageChange: (page: number) => void }) {
+interface IGalleryProps {
+    currentPage: number
+    onPageChange: (page: number) => void
+}
+
+export default function Gallery({ currentPage, onPageChange }: IGalleryProps) {
     const {data, loading, error} = useQuery<GQLGetCharacters>(GET_ITEMS, {
         variables: {page: currentPage, filter: {name: 'rick'}},
     });

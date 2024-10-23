@@ -6,7 +6,11 @@ export const metadata = {
     description: 'Demo project from Maksim Tsvetkov'
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+interface IRootLayoutProps {
+    children: ReactNode
+}
+
+export default function RootLayout({ children }: IRootLayoutProps) {
     return (
         <html lang="en">
             <body suppressHydrationWarning={true}>

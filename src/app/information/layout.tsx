@@ -7,7 +7,11 @@ import { ReactNode } from 'react'
 
 const NoSSRProfileMenu = dynamic(() => import('../../components/profile-menu'), { ssr: false })
 
-export default function InformationLayout({ children }: { children: ReactNode }) {
+interface IInformationLayoutProps {
+    children: ReactNode
+}
+
+export default function InformationLayout({ children }: IInformationLayoutProps) {
     return (
         <AppContextProvider>
             <Grid

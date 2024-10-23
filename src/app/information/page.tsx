@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { useAppContext } from '../../hooks/context.hook'
 import ProfileForm from '../../components/profile-form'
 import { Skeleton, Stack } from '@chakra-ui/react'
@@ -9,11 +8,7 @@ import Content from './content'
 
 export default function InformationPage() {
     const { profile, updateProfile } = useAppContext()
-    const [isIdentified, setIsIdentified] = useState<boolean>(false)
-
-    useEffect(() => {
-        setIsIdentified(profile !== null && profile?.username !== '' && profile?.jobTitle !== '')
-    }, [profile])
+    const isIdentified = profile !== null && profile?.username !== '' && profile?.jobTitle !== ''
 
     function handleSubmit(profileData) {
         updateProfile(profileData)
